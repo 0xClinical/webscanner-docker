@@ -91,7 +91,7 @@ def check_csrf_get(url):
 
     # 发送GET请求
     response = session.get(full_url)
-    url_edit = url + '/vul/csrf/csrfget/csrf_get_edit.php'
+    url_edit = url
     # 检查登录是否成功
     if response.status_code == 200:
         # 获取表单参数和值
@@ -138,7 +138,7 @@ def check_csrf_post(url):
 
     # 发送GET请求
     response = session.get(full_url)
-    url_edit = url + '/vul/csrf/csrfpost/csrf_post_edit.php'
+    url_edit = url
     # 检查登录是否成功
     if response.status_code == 200:
         # 获取表单参数和值
@@ -185,7 +185,7 @@ def check_csrf_token(url):
 
     # 发送GET请求
     response = session.get(full_url)
-    url_edit = url + '/vul/csrf/csrftoken/token_get_edit.php'
+    url_edit = url 
     # 检查登录是否成功
     if response.status_code == 200:
         # 获取表单参数和值

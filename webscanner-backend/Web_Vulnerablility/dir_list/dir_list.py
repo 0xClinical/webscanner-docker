@@ -14,13 +14,3 @@ def check_directory_traversal(url):
         else:
             print(f"Not vulnerable: {test_url}")
     return False
-
-if __name__ == '__main__':
-    while True:
-        input_url = input("请输入URL（输入 q 退出）：")
-        if input_url.lower() == "q":
-            break
-
-        target_url = input("请输入用于目标的URL：")
-
-        check_directory_traversal(target_url)

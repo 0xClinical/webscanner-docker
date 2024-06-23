@@ -1,6 +1,6 @@
 import psycopg2
 import re
-
+import os
 
 class SQL:
     def __init__(self):
@@ -10,10 +10,10 @@ class SQL:
     def __connectSQL__(self):
         try:
             conn = psycopg2.connect(
-                host="localhost",
-                user="damn",
-                password="123000123",  # 替换为你的PostgreSQL密码
-                database="scanner"
+                host=os.getenv('DB_HOST', 'db'),
+                user=os.getenv('DB_USER', 'damn'),
+                password=os.getenv('DB_PASSWORD', '123000123'),
+                database=os.getenv('DB_NAME', 'scanner')
             )
             cursor = conn.cursor()
             create_table_query = '''
@@ -25,8 +25,9 @@ class SQL:
                 '''
             cursor.execute(create_table_query)
             conn.commit()
-            return conn
             print("Table created successfully.")
+            return conn
+            
         except Exception as e:
             print(f"Error: {e}")
         finally:

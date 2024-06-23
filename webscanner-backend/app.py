@@ -4,11 +4,6 @@ from flask_cors import CORS
 from flask import Flask, jsonify
 from flask import request
 from flask import render_template
-import plotly.graph_objs as go
-from keras_preprocessing.sequence import pad_sequences
-from threading import Thread
-from keras.preprocessing.text import Tokenizer
-import label_data
 import flask
 import json
 from Web_Vulnerablility.scan_endpoint import scanweb,read_list_from_database
@@ -17,68 +12,6 @@ from phishing import classify
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})  # 允许所有来源访问/api/*端点
-
-
-def prepare_url(url):
-    urlz = label_data.main()
-
-    samples = []
-    labels = []
-    for k, v in urlz.items():
-        samples.append(k)
-        labels.append(v)
-
-    maxlen = 128
-    max_words = 20000
-
-    tokenizer = Tokenizer(num_words=max_words, char_level=True)
-    tokenizer.fit_on_texts(samples)
-    sequences = tokenizer.texts_to_sequences(url)
-    '''
-    创建一个Tokenizer对象，并使用样本数据samples对其进行训练，以便后续可以使用这个Tokenizer对象对文本数据进行编码和处理。训练过程中会构建词汇表和统计词频等信息，以供后续使用。
-    '''
-    word_index = tokenizer.word_index
-    # print('Found %s unique tokens.' % len(word_index))
-
-    url_prepped = pad_sequences(sequences, maxlen=maxlen)
-    return url_prepped
-
-
-# 写好的数据库连接函数，
-# 传入的是table，数据表的名称，
-# 返回值是数据表中所有的数据，以元祖的格式返回
-# 模拟已知的漏洞列表（可以根据实际情况进行修改）
-sql1 = SQL()
-counter = sql1.selectSQL(sql1.cursor)[0]
-vulnerabilities = {
-    'XSS': '跨站脚本攻击（Cross-Site Scripting）',
-    'SQLI': 'SQL 注入攻击（SQL Injection）',
-    'RCE': '远程命令执行（Remote Code Execution）'
-}
-
-client_proxy = {
-    "Internet Explorer 11": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    "Chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
-    "Firefox": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0",
-    "Safari": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
-    "Default": ""
-}
-
-scan_mode = {
-    "全面扫描": 2,
-    "快速扫描": 1,
-    "SQL注入扫描": 3,
-    "XSS扫描": 4,
-    "暴力破解扫描": 5,
-    "远程代码执行扫描": 6,
-    "文件漏洞扫描": 7
-}
-
-
-shared_data = {
-
-}
-
 
 # 启动服务器后运行的第一个函数，显示对应的网页内容
 @app.route('/', methods=['GET', 'POST'])
@@ -202,7 +135,5 @@ def save_user_info(email, data):
     # 这是一个示例逻辑，实际保存应更加复杂
     pass
 
-# 主函数
 if __name__ == '__main__':
-    # app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
