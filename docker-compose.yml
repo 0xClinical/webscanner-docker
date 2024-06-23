@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  react-app:
+    build:
+      context: ./webscanner-foretend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  flask-api:
+    build:
+      context: ./webscanner
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://damn:123000123@db:5432/scanner
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+
+  pikachu:
+    image: 8023/pikachu-expect:latest
+    ports:
+      - "8765:80"
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: damn
+      POSTGRES_PASSWORD: 123000123
+      POSTGRES_DB: scanner
+    ports:
+      - "5432:5432"
