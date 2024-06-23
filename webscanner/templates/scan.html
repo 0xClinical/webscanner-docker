@@ -1,0 +1,221 @@
+       <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web漏洞扫描系统</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+     <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <style>
+        body {
+            
+            font-family: Arial, sans-serif;
+            background-image: url("/static/assets/i/bg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;         
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        .description {
+            font-size: 12px;
+            color: hsl(221, 68%, 63%);
+            margin-bottom: 10px;
+        }
+        .scan-speed {
+            margin-bottom: 10px;
+        }
+        .scan-speed input[type="range"] {
+            width: 100%;
+        }
+        .login-option {
+            margin-bottom: 10px;
+        }
+        .proxy-option {
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f00b0b;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body data-type="generalComponents">
+
+
+//页眉
+<header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="/static/assets/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+
+
+            </ul>
+        </div>
+    </header>
+
+<!-- 设置内外边距 -->
+    <div class="tpl-page-container tpl-page-header-fixed">
+
+<!-- 设置宽度背景 -->
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                功能列表
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                   <li class="tpl-left-nav-item">
+                        <a href="/scan" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>扫描配置</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/result" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>漏洞信息</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/dashboard" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/user" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>用户信息</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/fish" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>钓鱼网站识别</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>    
+
+
+    <!-- 对内外边距调整 -->
+<div class="tpl-content-wrapper">
+    <div class="container">
+        <h1>对Web漏洞进行扫描</h1>
+        <form action="/scan" method="post">
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url" placeholder="输入要扫描的网站URL" required>
+            <div class="description">输入要扫描的网站URL</div>
+        <label for="scan_mode">扫描模式:</label>
+        <select name="scan_mode" id="scan_mode">
+            <option value="quick">快速扫描</option>
+            <option value="full">全面扫描</option>
+            <option value="sql_injection">SQL注入扫描</option>
+            <option value="xss">XSS扫描</option>
+            <option value="brute_force">暴力破解扫描</option>
+            <option value="remote_code_execution">远程代码执行扫描</option>
+            <option value="file_vulnerability">文件漏洞扫描</option>
+        </select>
+        <div class="description">选择要进行的扫描模式</div>
+
+        <div class="scan-speed">
+            <label for="speed">扫描速度:</label>
+            <input type="range" id="speed" name="speed" min="1" max="3">
+        </div>
+        <div class="description">选择扫描速度：慢速、中速、快速</div>
+
+        <div class="login-option">
+            <label for="username">账号:</label>
+            <input type="text" id="username" name="username" placeholder="账号">
+            <label for="password">密码:</label>
+            <input type="password" id="password" name="password" placeholder="密码">
+        </div>
+        <div class="description">提供网站登录选项</div>
+
+        <div class="proxy-option">
+            <label for="proxy">客户端代理选择:</label>
+            <select id="proxy" name="proxy">
+                <option value="none">Default</option>
+                <option value="IE">Internet Explorer 11</option>
+                <option value="Chrome">Chrome</option>
+                <option value="Firefox">Firefox</option>
+                <option value="Safari">Safari</option>
+            </select>
+        </div>
+        <div class="description">选择爬虫的代理</div>
+
+        <input type="submit" value="开始扫描">
+    </form>
+</div>
+</div>
+
+<script>
+    {% if message %}
+        alert("{{ message }}");
+    {% endif %}
+</script>
+
+</body>
+</html>

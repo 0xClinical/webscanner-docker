@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web漏洞扫描系统</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/static/assets/i/bg2.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Page title styles */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top:150px; 
+            color: brown;
+        }
+
+        /* Table styles */
+        table {
+            width:1000px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        tr:first-child {
+            background-color: darkseagreen;
+            color:  rgb(32, 80, 240); /* Optional: Set the text color to white for better visibility */
+        }
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        /* Icon input styles */
+        .icon-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .icon-input img {
+            margin-right: 10px;
+            width: 24px; /* 调整图标大小 */
+            height: 24px; /* 调整图标大小 */
+        }
+
+        .icon-input input {
+             width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body data-type="generalComponents">
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="/static/assets/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right"></div>
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list"></ul>
+        </div>
+    </header>
+
+      <div class="tpl-page-container tpl-page-header-fixed">
+
+
+            <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                功能列表
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                   <li class="tpl-left-nav-item">
+                        <a href="/scan" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-home"></i>
+                            <span>扫描配置</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/result" class="nav-link active">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>漏洞信息</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/dashboard" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/user" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>用户信息</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/fish" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>钓鱼网站识别</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div>
+            <h1>漏洞</h1>
+
+            <div class="icon-input">
+                <img src="/static/assets/i/icon.png" alt="图标">
+                <input type="text" placeholder="http://192.168.1.192:8086/pikachu">
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>漏洞类型</th>
+                        <th>计数</th>
+                        <th>严重性</th>
+                        <th>详细信息</th>
+                    </tr>
+                </thead>
+                <!-- 这里添加数据行 -->
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{ item.class }}</td>
+                        <td>{{ item.count }}</td>
+                        <td>{{ item.rank }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <span>查看</span>
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <div>Url: {{ item.urls }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

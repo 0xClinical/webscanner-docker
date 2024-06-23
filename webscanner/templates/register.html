@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web漏洞扫描应用 - 注册</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            margin-top: 100px;
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px; /* 表单宽度 */
+            margin: 0 auto; /* 居中对齐 */
+        }
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 14px;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p.error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function displayError() {
+            alert("两次输入的密码不相同");
+        }
+        function switchToLogin() {
+            window.location.href = "/login";
+        }
+    </script>
+</head>
+<body>
+    <h1>Web漏洞扫描应用 - 注册</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+        <script>displayError();</script>
+    {% endif %}
+    <form action="/register" method="post">
+        <input type="text" name="username" placeholder="用户名" required><br>
+        <input type="password" name="password" placeholder="密码" required><br>
+        <input type="password" name="confirm_password" placeholder="确认密码" required><br>
+        <input type="submit" value="注册">
+        <p class="login-link">已有账号？<a href="/login">点击此处登录</a></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,88 @@
+/* Dashboard.css */
+
+.dashboard-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* 确保最小高度为视口高度 */
+  overflow: visible; /* 允许内容溢出，页面高度会随内容增加 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1d1f21; /* 深色背景 */
+}
+
+.dashboard-content-overlay {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  margin: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(34, 34, 34, 0.9); /* 浅色半透明背景 */
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1.5s ease-in-out;
+  border: 2px solid #00ffff; /* 科技风边框 */
+}
+
+.dashboard-page-title {
+  font-size: 2.5rem;
+  color: #00ffff; /* 青色字体 */
+  margin-bottom: 1rem;
+  font-family: 'Press Start 2P', cursive; /* 像素字体 */
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.charts-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.chart {
+  width: 30%;
+  color: #00ffff; /* 确保图表标签可见 */
+  font-family: 'Press Start 2P', cursive; /* 像素字体 */
+}
+
+.vulnerabilities-table {
+  width: 100%;
+}
+
+.vulnerabilities-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.vulnerabilities-table th,
+.vulnerabilities-table td {
+  padding: 0.75rem;
+  border: 1px solid #00ffff; /* 科技风边框 */
+  text-align: left;
+  color: #ffffff; /* 白色字体 */
+  font-family: 'Press Start 2P', cursive; /* 像素字体 */
+}
+
+.vulnerabilities-table th {
+  background-color: #282a36;
+}
+
+.vulnerabilities-table tr:nth-child(even) {
+  background-color: #34353e;
+}
+
+.vulnerabilities-table tr:nth-child(odd) {
+  background-color: #2c2d33;
+}
+
+.vulnerabilities-table ul {
+  padding-left: 1rem;
+  list-style-type: disc;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

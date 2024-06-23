@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web漏洞扫描系统</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+     <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            display: flex;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chart1 {
+            text-align: center;
+            width: 400px;
+            height: 400px;
+            margin-left: 80px;
+            margin-right: 5px;
+            border: 2px solid #ccc;
+            background-color: rgb(232, 179, 179);
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chart2 {
+            text-align: center;
+            width: 400px;
+            height: 400px;
+            margin-left: 80px;
+            margin-right: 5px;
+            border: 2px solid #ccc;
+            background-color: rgb(209, 93, 93);
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chart3 {
+            text-align: center;
+            width: 400px;
+            height: 400px;
+            margin-left: 80px;
+            margin-right: 5px;
+            border: 2px solid #ccc;
+            background-color: rgb(209, 17, 17);
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-container {
+            width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            margin-left: 350px;
+            margin-bottom: 100px;
+        }
+        .table-container {
+            margin-top: 0px; /* 添加上边距，向下移动表格容器 */
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .table caption {
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ccc;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .table thead {
+            background-color: #f2f2f2;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+       
+        .table-container table:first-child {
+            width: 30%;
+        }
+
+        .table-container table:last-child {
+            width: 70%;
+        }
+
+    </style>
+</head>
+<body data-type="generalComponents">
+<header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="/static/assets/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+
+
+            </ul>
+        </div>
+    </header>
+
+ <div class="tpl-page-container tpl-page-header-fixed">
+
+
+          <div class="tpl-page-container">
+
+
+           <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                功能列表
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                   <li class="tpl-left-nav-item">
+                        <a href="/scan" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-home"></i>
+                            <span>扫描配置</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/result" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>漏洞信息</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/dashboard" class="nav-link active">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>仪表盘</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/user" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>用户信息</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/fish" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>钓鱼网站识别</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    <h1>Dashboard</h1>
+    <div class="chart-container">
+        <div class="chart1" >
+            <h2>低危漏洞</h2>
+            {{ pie_chart1|safe }}
+            <p style="text-align: center; font-size: 24px; font-weight: bold;">{{ vulnerabilities_data['低危漏洞'] }}</p>
+        </div>
+        <div class="chart2">
+            <h2>中危漏洞</h2>
+            {{ pie_chart2|safe }}
+            <p style="text-align: center; font-size: 24px; font-weight: bold;">{{ vulnerabilities_data['中危漏洞'] }}</p>
+        </div>
+        <div class="chart3">
+            <h2>高危漏洞</h2>
+            {{ pie_chart3|safe }}
+            <p style="text-align: center; font-size: 24px; font-weight: bold;">{{ vulnerabilities_data['高危漏洞'] }}</p>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="table">
+            <caption>受到攻击的目标</caption>
+            <thead>
+                <tr>
+                    <th>低危漏洞</th>
+                    <th>中危漏洞</th>
+                    <th>高危漏洞</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in target_data %}
+                <tr>
+                    <td>{{ data['低危漏洞'] }}</td>
+                    <td>{{ data['中危漏洞'] }}</td>
+                    <td>{{ data['高危漏洞'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table">
+            <caption>漏洞统计</caption>
+            <thead>
+                <tr>
+                    <th>漏洞名称</th>
+                    <th>个数</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vulnerability, count in vulnerabilities_data.items() %}
+                <tr>
+                    <td>{{ vulnerability }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+     </div>
+  </div>
+</body>
+</html>

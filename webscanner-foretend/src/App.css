@@ -1,0 +1,41 @@
+body, html, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.logged-out {
+  background-size: cover;
+}
+
+.logged-in {
+  background: none;
+  padding: 0; /* 确保没有多余的填充 */
+  margin: 0; /* 确保没有多余的边距 */
+  
+}
+
+
+.content {
+  flex-grow: 1;
+  padding: 0rem;
+  margin-top: 40px; /* 确保内容下移，不被导航栏覆盖 */
+  background-color: #0db5e3e0;
+  animation: fadeIn 1s ease-in-out; /* 添加渐入动画 */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
