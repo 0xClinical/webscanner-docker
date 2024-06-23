@@ -17,8 +17,6 @@ from phishing import classify
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})  # 允许所有来源访问/api/*端点
-global graph
-graph = tf.compat.v1.get_default_graph()
 
 
 def prepare_url(url):
