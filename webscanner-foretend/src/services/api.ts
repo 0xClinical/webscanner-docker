@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:5000/api';
+const API_URL = 'http://47.254.23.221/api';
 
 //登陆
 export const login = async (email: string, password: string) => {

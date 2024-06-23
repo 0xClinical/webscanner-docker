@@ -1,0 +1,141 @@
+Creating network "webscanner-docker_default" with the default driver
+Found orphan containers (webscanner-docker_react-app_1, webscanner-docker_pikachuvul_1, 0e57bd91f106_webscanner-docker_flask-api_1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+Building webscanner-foretend
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 347B done
+#1 DONE 0.0s
+
+#2 [auth] library/node:pull token for registry-1.docker.io
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:14
+#3 DONE 0.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/7] FROM docker.io/library/node:14@sha256:a158d3b9b4e3fa813fa6c8c590b8f0a860e015ad4e59bbce5744d2f6fd8461aa
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 4.04MB 0.0s done
+#6 DONE 0.0s
+
+#7 [3/7] COPY package*.json ./
+#7 CACHED
+
+#8 [5/7] COPY . .
+#8 CACHED
+
+#9 [6/7] RUN npm run build
+#9 CACHED
+
+#10 [2/7] WORKDIR /app
+#10 CACHED
+
+#11 [4/7] RUN npm install
+#11 CACHED
+
+#12 [7/7] RUN npm install -g serve
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 writing image sha256:c3dfe2c6ee86e5238bd5ce910fc997294622d874fb1f4594717b544eae3b6e07 done
+#13 naming to docker.io/library/webscanner-docker_webscanner-foretend done
+#13 DONE 0.0s
+Building pikachu
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 517B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/area39/pikachu:latest
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/area39/pikachu:latest
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 721B done
+#5 DONE 0.0s
+
+#6 [4/6] COPY init_db.sh /usr/local/bin/init_db.sh
+#6 CACHED
+
+#7 [5/6] RUN chmod +x /usr/local/bin/init_db.sh
+#7 CACHED
+
+#8 [3/6] COPY init_db.sql /docker-entrypoint-initdb.d/init_db.sql
+#8 CACHED
+
+#9 [2/6] WORKDIR /app
+#9 CACHED
+
+#10 [6/6] RUN sed -i 's|exec "$@"|/usr/local/bin/init_db.sh \&\& exec "$@"|' /run.sh
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:c59a6daa9c4eb613d7b311c89eb4fea82a2f4abfc4320a4b05ccf24b356d30b7 done
+#11 naming to docker.io/library/webscanner-docker_pikachu done
+#11 DONE 0.0s
+Building webscanner-backend
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 362B done
+#1 DONE 0.0s
+
+#2 [auth] library/python:pull token for registry-1.docker.io
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.10-slim
+#3 DONE 0.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.10-slim@sha256:6af8ee12bd4e73177185a5ad01a85a1bd9dd6a9fe28161c1950ac1f604d51cdf
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 10.77MB 0.1s done
+#6 DONE 0.1s
+
+#7 [4/5] RUN pip install -r requirements.txt
+#7 CACHED
+
+#8 [2/5] WORKDIR /app
+#8 CACHED
+
+#9 [3/5] COPY requirements.txt ./
+#9 CACHED
+
+#10 [5/5] COPY . .
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:38e78e3ffda8c646b117dc40d00280e9816551a4e4064cf7a85c32407d771a71 done
+#11 naming to docker.io/library/webscanner-docker_webscanner-backend done
+#11 DONE 0.0s
+Creating webscanner-docker_webscanner-foretend_1 ... 
+Creating webscanner-docker_db_1                  ... 
+Creating webscanner-docker_pikachu_1             ... 
+Creating webscanner-docker_db_1                  ... done
+Creating webscanner-docker_webscanner-backend_1  ... 
+Creating webscanner-docker_webscanner-foretend_1 ... done
+Creating webscanner-docker_pikachu_1             ... done
+Creating webscanner-docker_webscanner-backend_1  ... done
+Creating webscanner-docker_nginx_1               ... 
+Creating webscanner-docker_nginx_1               ... done
