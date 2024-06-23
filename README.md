@@ -42,3 +42,7 @@ docker-compose down
 ### 使用教程
 
 部署完成后，打开浏览器访问 localhost:3000 即可访问网页，输入账号密码后就可登录。
+
+### 注意
+
+扫面时，输入的扫面网址为 http://pikachu/
