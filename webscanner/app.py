@@ -8,7 +8,6 @@ import plotly.graph_objs as go
 from keras_preprocessing.sequence import pad_sequences
 from threading import Thread
 from keras.preprocessing.text import Tokenizer
-import tensorflow as tf
 import label_data
 import flask
 import json
