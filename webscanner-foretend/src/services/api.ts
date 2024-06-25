@@ -21,6 +21,15 @@ export const register = async (email: string, password: string) => {
     throw error;
   }
 };
+//更新信息
+export const changePwd = async (id: number,email: string, password: string) => {
+  try {
+    const response = await axios.post(`${API_URL}/saveInfo`, { id,email, password });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 //漏洞扫描
 export const startScan = async (url: string, config: string) => {
@@ -52,6 +61,7 @@ export const dashboard = async () => {
     throw error;
   }
 };
+//钓鱼网站识别
 export const checkUrl = async (url:string) => {
   try {
     const response = await axios.post(`${API_URL}/check-url`, { url });
@@ -61,7 +71,7 @@ export const checkUrl = async (url:string) => {
     throw error;
   }
 };
-
+//图片识别
 export const checkImage = async (image:File) => {
   const formData = new FormData();
   formData.append('image', image);

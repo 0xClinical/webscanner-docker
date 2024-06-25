@@ -25,7 +25,6 @@
   object-fit: cover;
   z-index: 0;
 }
-
 .user-settings-container {
   position: relative;
   z-index: 1;
@@ -33,17 +32,17 @@
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
-  width: 80%;  /* 增加宽度 */
-  max-width: 800px;  /* 增加最大宽度 */
+  width: 80%;
+  max-width: 800px;
   margin: 2rem auto;
   color: #00ffff;
   animation: fadeIn 1s ease-in-out;
 }
 
 .user-settings-title {
-  font-size: 2rem;  /* 增加字体大小 */
+  font-size: 2rem;
   color: hsl(0, 100%, 50%);
-  margin-bottom: 1.5rem;  /* 增加底部间距 */
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
   text-align: center;
 }
@@ -53,13 +52,74 @@
 }
 
 .user-info p {
-  margin-bottom: 1.5rem;  /* 增加段落间距 */
-  font-size: 1.1rem;  /* 增加字体大小 */
-  line-height: 1.5;  /* 增加行高 */
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 .user-info strong {
   color: #ff00ff;
+}
+
+.password-change-form {
+  margin-top: 2rem;
+}
+
+.password-change-form h3 {
+  font-size: 1.5rem;
+  color: hsl(0, 100%, 50%);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #00ffff;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #00ffff;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ffff;
+}
+
+.input-group input:focus {
+  border-color: #ff00ff;
+  outline: none;
+  box-shadow: 0 0 10px #ff00ff;
+}
+
+.change-password-button {
+  background: #00ffff;
+  color: black;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-transform: uppercase;
+}
+
+.change-password-button:hover {
+  background: #2980b9;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  color: green;
+  margin-bottom: 1rem;
 }
 
 @keyframes fadeIn {
@@ -73,7 +133,6 @@
   }
 }
 
-/* 媒体查询 */
 @media (max-width: 600px) {
   .user-settings-container {
     width: 90%;
@@ -87,5 +146,13 @@
   .user-info p {
     font-size: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .password-change-form h3 {
+    font-size: 1.2rem;
+  }
+
+  .input-group input {
+    font-size: 0.9rem;
   }
 }

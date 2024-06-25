@@ -58,6 +58,7 @@ def register():
 
     db = SQL()
     if db.user_exists(email):
+        db.closeSQL()
         return jsonify({'status': 'fail', 'message': 'User already exists'}), 409
     else:
         db.insert_user(email, password)
@@ -120,20 +121,22 @@ def check_image():
 @app.route('/api/saveInfo', methods=['POST'])
 def save_info():
     data = request.get_json()
+    id = data.get('id')
     email = data.get('email')
     password = data.get('password')
 
-    if email in users and users[email] == password:
-        # 假设我们有一个保存设置的函数 `save_user_info`
-        save_user_info(email, data)
-        return jsonify({'status': 'success', 'message': 'Information saved'}), 200
-    else:
-        return jsonify({'status': 'fail', 'message': 'Invalid credentials'}), 401
-def is_phishing_image(image):
-    # 这里添加检测钓鱼图片的逻辑
-    # 这是一个示例逻辑，实际检测应更加复杂
-    return False
+    if not id or not password or not email:
+        return jsonify({'status': 'fail', 'message': 'Email and password are required'}), 400
 
+    db = SQL()
+    if db.user_exists(email):
+        db.update_user(id, password=password)
+        return jsonify({'status': 'success', 'message': 'update password successful'}), 201
+    else:
+        db.closeSQL()
+        return jsonify({'status': 'fail', 'message': 'User not exists'}), 409
+        
+    
 
 def perform_scan(url, config):
     results = []
@@ -144,11 +147,6 @@ def perform_scan(url, config):
     # 这是一个示例逻辑，实际扫描应更加复杂
     return results
 
-
-def save_user_info(email, data):
-    # 这里添加保存用户设置的逻辑
-    # 这是一个示例逻辑，实际保存应更加复杂
-    pass
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
