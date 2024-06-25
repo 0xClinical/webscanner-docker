@@ -3,38 +3,48 @@
 from flask_cors import CORS
 from flask import Flask, jsonify
 from flask import request
-from flask import render_template
-import flask
-import json
 from Web_Vulnerablility.scan_endpoint import scanweb,read_list_from_database
 from static.Tools.SQL.SQL_op import SQL
 from phishing import classify
+import jwt
+import datetime
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})  # 允许所有来源访问/api/*端点
+sql = SQL()
+sql.init_db()
+app.config['SECRET_KEY'] = 'damndamndamndamndandamn'  # 确保这个是字符串类型
 
 # 启动服务器后运行的第一个函数，显示对应的网页内容
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('login.html')
+    pass
 
 # 假设我们有一个简单的用户数据库
 users = {"admin@1","123456"}
 scan_results = []
 # 对登录的用户名和密码进行判断
+
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
-    '''
-    if email in users and users[email] == password:
-        return jsonify({'status': 'success', 'message': 'Login successful'}), 200
+    
+    if not email or not password:
+        return jsonify({'status': 'fail', 'message': 'Email and password are required'}), 400
+
+    db = SQL()
+    user_info = db.login_user(email, password)
+    if user_info:
+        token = jwt.encode({
+            'user_id': user_info['id'],
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+        }, app.config['SECRET_KEY'], algorithm="HS256")
+        return jsonify({'status': 'success', 'message': 'Login successful', 'token': token, 'user': user_info}), 200
     else:
         return jsonify({'status': 'fail', 'message': 'Invalid credentials'}), 401
-        '''
-    return jsonify({'status': 'success', 'message': 'Login successful'}), 200
-
+    
 
 
 @app.route('/api/register', methods=['POST'])
@@ -43,10 +53,14 @@ def register():
     email = data.get('email')
     password = data.get('password')
 
-    if email in users:
+    if not email or not password:
+        return jsonify({'status': 'fail', 'message': 'Email and password are required'}), 400
+
+    db = SQL()
+    if db.user_exists(email):
         return jsonify({'status': 'fail', 'message': 'User already exists'}), 409
     else:
-        users[email] = password
+        db.insert_user(email, password)
         return jsonify({'status': 'success', 'message': 'Registration successful'}), 201
 
 # 显示教师首页的函数，可以显示首页里的信息
@@ -68,10 +82,11 @@ def vul_info():
     email = data.get('email')
     password = data.get('password')
 
-    if email in users and users[email] == password:
-        return jsonify({'status': 'success', 'results': scan_results}), 200
-    else:
-        return jsonify({'status': 'fail', 'message': 'Invalid credentials'}), 401
+    if not email or not password:
+        return jsonify({'status': 'fail', 'message': 'Email and password are required'}), 400
+    
+    return jsonify({'status': 'success', 'results': scan_results}), 200
+   
 
 
 @app.route('/api/dashboard', methods=['GET'])

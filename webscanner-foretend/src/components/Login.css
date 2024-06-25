@@ -1,84 +1,85 @@
 /* Reset some basic styles for consistency */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial, sans-serif';
-  }
-  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial, sans-serif';
+}
 
-  
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    
-  }
-  
-  .login-box {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
-    width: 300px;
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
-    z-index: 1;
-  }
-  .background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0; /* 确保视频在背景 */
-  }
-  .login-title {
-    font-size: 1.5rem;
-    color: hsl(0, 100%, 50%);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-  }
-  .login-box h2 {
-    margin-bottom: 1rem;
-    color: #2c3e50;
-  }
-  
-  .input-group {
-    margin-bottom: 1rem;
-    text-align: left;
-  }
-  
-  .input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #00ffff;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 2px solid #00ffff;
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #00ffff;
-    font-family: 'Press Start 2P', cursive;
-  }
-  
-  .input-group input:focus {
-    border-color: #ff00ff;
-    outline: none;
-    box-shadow: 0 0 10px #ff00ff;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 1rem;
-  }
-  
-  .login-button {
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay background */
+}
+
+.login-box {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  z-index: 1;
+}
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* Ensure video is in the background */
+}
+
+.login-title {
+  font-size: 1.5rem;
+  color: hsl(0, 100%, 50%);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #00ffff;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #00ffff;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ffff;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.input-group input:focus {
+  border-color: #ff00ff;
+  outline: none;
+  box-shadow: 0 0 10px #ff00ff;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-button, .register-button, .close-button {
   background: #00ffff;
   color: black;
   padding: 0.5rem 1rem;
@@ -88,20 +89,33 @@
   transition: background 0.3s;
   font-family: 'Press Start 2P', cursive;
   text-transform: uppercase;
+  width: 48%;
 }
-  
-  .login-button:hover {
-    background: #2980b9;
+
+.login-button:hover, .register-button:hover, .close-button:hover {
+  background: #2980b9;
+}
+
+.register-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
+  z-index: 2; /* Above the login box */
+  width: 350px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}

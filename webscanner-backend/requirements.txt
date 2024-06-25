@@ -85,3 +85,4 @@ urllib3==1.26.16
 Werkzeug==2.3.7
 whois==1.20240129.2
 wrapt==1.14.1
+PyJWT==2.8.0

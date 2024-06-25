@@ -6,12 +6,7 @@ import requests
 import urllib
 import hashlib
 from colorama import Fore
-'''
-测试：
-    print(check_csrf_get('http://192.168.1.192:8086/pikachu/vul/csrf/csrfget/csrf_get_login.php'))
-    print(check_csrf_post('http://192.168.1.192:8086/pikachu/vul/csrf/csrfpost/csrf_post_login.php'))
-    print(check_csrf_token('http://192.168.1.192:8086/pikachu/vul/csrf/csrftoken/token_get_login.php'))
-'''
+
 
 
 def build_payloads_get(url, payload, session):

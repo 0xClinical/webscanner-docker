@@ -198,19 +198,18 @@ def scan_choose(url, scan_mode):
 
 
 def write_list_to_database( data_list):
-    mysql = SQL()
+    sql = SQL()
 
     for item in data_list:
-        mysql.insertSQL(mysql.conn, mysql.cursor, item)
+        sql.insertSQL(item)
 
-    mysql.closeSQL()
+    sql.closeSQL()
 
 
 def read_list_from_database():
     sql = SQL()  # 创建 SQL 类的实例
-    cursor = sql.cursor  # 获取数据库连接的游标
-    results = sql.selectSQL(cursor)  # 执行查询并获取结果
-    data = []
+   
+    results = sql.selectSQL()  # 执行查询并获取结果
     cnx = 0
     list_vulnerability = ['暴力破解漏洞', '文件包含漏洞', '目录遍历漏洞', '文件上传和下载漏洞',
                           'SQL time blinds vulnerability',
@@ -222,7 +221,6 @@ def read_list_from_database():
     medium_risk = ['目录遍历漏洞', '文件上传和下载漏洞', 'XSS Href', 'XSS Stored', 'XSS JavaScript', 'XSS DOM']
     low_risk = ['CSRF漏洞', 'XSS POST Reflected', 'XSS GET Reflected']
     count = results[0]
-    separator = ', '  # 指定分隔符
 
     high_severity = []
     medium_severity = []
@@ -270,7 +268,7 @@ def read_list_from_database():
 
 def scanweb(url, scan_mode):
     result = scan_choose(url, scan_mode)
-    write_list_to_database( result)
+    write_list_to_database(result)
     return result
 
 

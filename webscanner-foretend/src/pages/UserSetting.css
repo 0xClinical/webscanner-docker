@@ -1,0 +1,91 @@
+/* Import pixel font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Reset some basic styles for consistency */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.user-settings-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.user-settings-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
+  width: 80%;  /* 增加宽度 */
+  max-width: 800px;  /* 增加最大宽度 */
+  margin: 2rem auto;
+  color: #00ffff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.user-settings-title {
+  font-size: 2rem;  /* 增加字体大小 */
+  color: hsl(0, 100%, 50%);
+  margin-bottom: 1.5rem;  /* 增加底部间距 */
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.user-info {
+  width: 100%;
+}
+
+.user-info p {
+  margin-bottom: 1.5rem;  /* 增加段落间距 */
+  font-size: 1.1rem;  /* 增加字体大小 */
+  line-height: 1.5;  /* 增加行高 */
+}
+
+.user-info strong {
+  color: #ff00ff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 媒体查询 */
+@media (max-width: 600px) {
+  .user-settings-container {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .user-settings-title {
+    font-size: 1.5rem;
+  }
+
+  .user-info p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}

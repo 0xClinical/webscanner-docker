@@ -7,19 +7,26 @@ import VulnerabilityScan from './pages/VulnerabilityScan';
 import VulnerabilityInfo from './pages/VulnerabilityInfo';
 import Dashboard from './pages/Dashboard';
 import PhishingDetection from './pages/PhishingDetection';
-
+import UserSettings from './pages/UserSetting'
 interface ScanResult {
   type: string;
   url: string;
 }
-
+interface User {
+  id: number,
+  email: string,
+  role: string,
+  created_at: string
+}
 function App() {
   const [token, setToken] = useState<string | null>(null);
   const [scanResults, setScanResults] = useState<ScanResult[]>([]);
   const [scanUrl, setScanUrl] = useState('');
+  const [user, setUser] = useState<any>(null);
 
-  const handleLogin = (token: string) => {
+  const handleLogin = (token: string,user: User) => {
     setToken(token);
+    setUser(user);
   };
   const handleScanComplete = (results: ScanResult[], url: string) => {
     setScanResults(results);
@@ -46,6 +53,7 @@ function App() {
               />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/phishing-detection" element={<PhishingDetection />} />
+              <Route path="/user-settings" element={<UserSettings user={user} />} />
               <Route path="*" element={<Navigate to="/vulnerability-scan" />} />
             </Routes>
           </div>
